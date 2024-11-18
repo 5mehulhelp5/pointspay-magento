@@ -1,0 +1,22 @@
+<?php
+
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var $block \Pointspay\Pointspay\Block\Info\Virtual
+ * @var $escaper \Magento\Framework\Escaper
+ */
+if (!isset($escaper)) {
+    $escaper = $block;
+}
+
+?>
+<span><?= $escaper->escapeHtml(__('The payment has been completed with the following method:')); ?></span>
+<br/>
+<?php if ($block->getInfo()->getAdditionalInformation('pointspay_flavor') === 'pointspay'): ?>
+    <span><strong><?= $block->getPaymentTitleByFlavor($block->getInfo()->getAdditionalInformation('pointspay_flavor')) ?></strong></span>
+<?php else: ?>
+    <span><strong><?= $block->getPaymentTitleByFlavor($block->getInfo()->getAdditionalInformation('pointspay_flavor')) ?></strong> by Pointspay</span>
+<?php endif; ?>
+<?= $escaper->escapeHtml($block->getChildHtml()); ?>
